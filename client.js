@@ -30,6 +30,10 @@ class surfaceModule extends Module {
     super('surfaceModule');
   }
 
+  resizeSurface(width, height) {
+    surface.resize(width, height)
+  }
+
   changeSurfaceType(Type) {
     Type === "Flat" ? surface.setShape(Surface.SurfaceShape.Flat) : surface.setShape(Surface.SurfaceShape.Cylinder)
   }

@@ -11,11 +11,21 @@ import {
 const surfaceModule = NativeModules.surfaceModule;
 
 export default class AdvancedSurfaceReact360 extends React.Component {
+  state = {
+    width: 1000,
+    height: 600
+  }
+
+  changeSurfaceDimensions(width, height) {
+    surfaceModule.resizeSurface(width, height)
+    this.setState({width: width, height: height})
+  }
+
   render() {
     return (
-      <View style={styles.panel}>
-        <VrButton style={styles.greetingBox}>
-          <Text>Change Dim.</Text>
+      <View style={[styles.panel, {width: this.state.width, height: this.state.height}]}>
+        <VrButton style={styles.greetingBox} onClick={() => this.changeSurfaceDimensions(500, 300)}>
+          <Text>Change Dimention</Text>
         </VrButton>
 
         <VrButton style={styles.greetingBox} onClick={() => surfaceModule.changeSurfaceType('Flat')}>
@@ -26,7 +36,7 @@ export default class AdvancedSurfaceReact360 extends React.Component {
           <Text>Cylinder</Text>
         </VrButton>
 
-        <VrButton style={styles.greetingBox}>
+        <VrButton style={styles.greetingBox} onClick={() => this.changeSurfaceDimensions(1000, 600)}>
           <Text>Reset</Text>
         </VrButton>
 
@@ -40,8 +50,6 @@ export default class AdvancedSurfaceReact360 extends React.Component {
 
 const styles = StyleSheet.create({
   panel: {
-    width: 1000,
-    height: 600,
     backgroundColor: 'rgba(255, 255, 255, 0.4)',
     justifyContent: 'center',
     alignItems: 'center',
