@@ -4,17 +4,35 @@ import {
   StyleSheet,
   Text,
   View,
+  VrButton,
+  NativeModules
 } from 'react-360';
+
+const surfaceModule = NativeModules.surfaceModule;
 
 export default class AdvancedSurfaceReact360 extends React.Component {
   render() {
     return (
       <View style={styles.panel}>
-        <View style={styles.greetingBox}>
-          <Text style={styles.greeting}>
-            Welcome to React 360
-          </Text>
-        </View>
+        <VrButton style={styles.greetingBox}>
+          <Text>Change Dim.</Text>
+        </VrButton>
+
+        <VrButton style={styles.greetingBox} onClick={() => surfaceModule.changeSurfaceType('Flat')}>
+          <Text>Flat</Text>
+        </VrButton>
+
+        <VrButton style={styles.greetingBox} onClick={() => surfaceModule.changeSurfaceType('Cylinder')}>
+          <Text>Cylinder</Text>
+        </VrButton>
+
+        <VrButton style={styles.greetingBox}>
+          <Text>Reset</Text>
+        </VrButton>
+
+        <VrButton style={styles.greetingBox}>
+          <Text>Destroy</Text>
+        </VrButton>
       </View>
     );
   }
@@ -22,7 +40,6 @@ export default class AdvancedSurfaceReact360 extends React.Component {
 
 const styles = StyleSheet.create({
   panel: {
-    // Fill the entire surface
     width: 1000,
     height: 600,
     backgroundColor: 'rgba(255, 255, 255, 0.4)',
@@ -30,6 +47,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   greetingBox: {
+    width: 200,
+    height: 60,
     padding: 20,
     backgroundColor: '#000000',
     borderColor: '#639dda',
@@ -38,6 +57,13 @@ const styles = StyleSheet.create({
   greeting: {
     fontSize: 30,
   },
+  buttonPanel: {
+    width: 300,
+    height: 300,
+    backgroundColor: 'rgb(255,127,80)',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
 
 AppRegistry.registerComponent('AdvancedSurfaceReact360', () => AdvancedSurfaceReact360);
